@@ -320,18 +320,11 @@ class CollectionTestCase(TestCase):
             repr(collection),
             "<Collection: version='1.0' href='href'>")
 
-    def test_str_unicode(self):
-        collection = Collection('href')
-        self.assertEqual(
-            unicode(collection),
-            '{"collection": {"href": "href", "version": "1.0"}}')
-
-    def test_str_non_unicode(self):
+    def test_str(self):
         collection = Collection('href')
         self.assertEqual(
             str(collection),
-            str('{"collection": {"href": "href", "version": "1.0"}}')
-        )
+            '{"collection": {"href": "href", "version": "1.0"}}')
 
 
 class ErrorTestCase(TestCase):
