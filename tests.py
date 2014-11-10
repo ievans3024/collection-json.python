@@ -322,9 +322,23 @@ class CollectionTestCase(TestCase):
 
     def test_str(self):
         collection = Collection('href')
-        self.assertEqual(
-            str(collection),
-            '{"collection": {"href": "href", "version": "1.0"}}')
+        try:
+            # Python 2
+            compare_unicode = unicode(collection)
+            self.assertEqual(
+                compare_unicode,
+                '{"collection": {"href": "href", "version": "1.0"}}'
+            )
+            self.assertEqual(
+                str(collection),
+                str('{"collection": {"href": "href", "version": "1.0"}}')
+            )
+        except NameError:
+            # Python 3
+            self.assertEqual(
+                str(collection),
+                '{"collection": {"href": "href", "version": "1.0"}}'
+            )
 
 
 class ErrorTestCase(TestCase):
